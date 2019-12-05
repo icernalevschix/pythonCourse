@@ -22,6 +22,13 @@ def generate_question(country_dict):
 
     country, capital = random.sample(country_dict.items(), 1)[0]
     rand_list = random.sample(list(country_dict.values()), 3)
+    
+    while True:
+        if capital in rand_list:
+            rand_list = random.sample(list(country_dict.values()), 3)
+        else:
+            break
+
     rand_list.insert(random.randrange(0,4), capital)
 
     return country, capital, rand_list
@@ -31,8 +38,8 @@ def main():
     country_dict = {}
 
     with open('countries.txt', 'rb') as f:
-        for i in f.readlines():
-            x = i.decode().split(',')
+        for line in f:
+            x = line.decode().split(',')
             country_dict[x[0]] = x[1].rstrip('\n')
 
         while True:
@@ -44,7 +51,7 @@ def main():
                 winsound.Beep(500, 1000)
             else:
                 print("\nLoser !")
-                print(f'The correct asnwer was: {capital}')
+                print(f'The correct answer was: {capital}')
                 winsound.PlaySound('SystemQuestion', winsound.SND_ALIAS)
 
 if __name__ == '__main__':

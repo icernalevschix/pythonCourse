@@ -35,12 +35,13 @@ while True:
 with open(os.path.join(cd,'my_data_folder\\file1.txt'), 'w') as f:
     for i in student_list:
         f.write(i.get_st_data())
-    f.close()
 
-with open(os.path.join(cd,'my_data_folder\\file1.txt'), 'r') as f1:
-    with open(os.path.join(cd,'my_data_folder\\file2.txt'), 'w') as f2:
-        f2.write(f1.read())
-        f2.close()
-    f1.close()
+with open(os.path.join(cd,'my_data_folder\\file1.txt'), 'r') as rf:
+    with open(os.path.join(cd,'my_data_folder\\file2.txt'), 'w') as wf:
+        chunk_size = 4096
+        rf_chunk = rf.read(chunk_size)
+        while len(rf_chunk) > 0:
+            wf.write(rf_chunk)
+            rf_chunk = rf.read(chunk_size)
 
 # os.system('copy ' + os.path.join(cd,'my_data_folder\\file1.txt ') + os.path.join(cd,'my_data_folder\\file2.txt'))

@@ -21,15 +21,11 @@ with open('ex1.txt', 'r') as f:
 
     # print("Word frequency: {}".format(word_count.get(word, 0)))
 
-f.close()
-
 
 # 3. Write a program that will append new content to the end of a file.
 
 with open('ex1.txt', 'a') as f:
     f.write("# 3. Write a program that will append new content to the end of a file.\n")
-
-f.close()
 
 
 # 4. Write a program that will remove newline character from a file.
@@ -38,4 +34,3 @@ with open('ex3.txt', 'r+') as f:
     new_text = f.read().replace('\n', '')
     f.seek(0)
     f.write(new_text)
-f.close()

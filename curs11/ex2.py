@@ -9,63 +9,11 @@
 4. Store each new created animal in a list / dictionary, write a function that will find all animals of a certain class"""
 
 import csv
-import random
-from datetime import datetime
+from random import randrange
 from zipfile import ZipFile
-
-class Zoo:
-
-#- Name, age, class (mammals, birds, fishes, reptiles)
-#- Initialization / Creation ( use __init__ method )
-    def __init__(self, name, speciesGroup, age):
-        self.name = name
-        self.speciesGroup = speciesGroup
-        self.age = age
-
-#- Initialization / creation by date of birth (use class method)
-    @classmethod
-    def init_by_date(cls, name, speciesGroup, bday):
-        return cls(name, speciesGroup, datetime.today().year - datetime.strptime(bday, '%Y%m%d').year )
-
-    def __str__(self):
-        return f'{self.__class__}({self.name}, {self.speciesGroup}, {self.age})'
-
-
-class Birds(Zoo):
-
-#- For each class of animal add methods that will display his favourite food.
-    @staticmethod
-    def favourite_food():
-        print("Birds' favourite food: \
-                \n  -Insects, worms, and grubs \
-                \n  -Seeds, grasses, and plant material \
-                \n  -Nectar and pollen" )
-
-
-class Mammals(Zoo):
-
-    @staticmethod
-    def favourite_food():
-        print("Mammals' favourite food: \
-                \n  -Meet and plants" )
-
-
-class Amphibians_Reptiles(Zoo):
-
-    @staticmethod
-    def favourite_food():
-        print("Reptiles' favourite food: \
-                \n  -Animal and plant matter, including fruits and vegetables" )
-
-    def __init__(self, name, speciesGroup, age, color = 'Green'):
-        super().__init__(name, speciesGroup, age)
-        self.color = color
-
-#- For reptiles add methods for changing color and length of it’s tail attribute.
-    def change_color(self, new_color):
-        self.color = new_color
-
-
+from Birds import Birds
+from Mammals import Mammals
+from Amphibians_Reptiles import Amphibians_Reptiles
 
 def list_class(dictionary, cls):
     for animal in dictionary:
@@ -103,12 +51,12 @@ def main():
             # print(line['taxonomicRankGenus'], line['taxonomicRankSpecies'], line['speciesGroup'])
             if line['speciesGroup'] == 'Birds':
                 name = f"{line['taxonomicRankGenus']} {line['taxonomicRankSpecies']}"
-                Animal_dict[name] = Birds(name, 'Birds', random.randrange(0,20))
+                Animal_dict[name] = Birds(name, 'Birds', randrange(0,20))
             elif line['speciesGroup'] == 'Mammals':
-                Animal_dict[line['scientificName']] = Mammals(line['scientificName'], 'Mammals', random.randrange(0,20))
+                Animal_dict[line['scientificName']] = Mammals(line['scientificName'], 'Mammals', randrange(0,20))
             elif line['speciesGroup'] == 'Amphibians_Reptiles':
                 name = f"{line['taxonomicRankGenus']} {line['taxonomicRankSpecies']}"
-                Animal_dict[name] = Amphibians_Reptiles(name, 'Mammals', random.randrange(0,20))
+                Animal_dict[name] = Amphibians_Reptiles(name, 'Mammals', randrange(0,20))
 
     # print('\n', Animal_dict['Bubo bubo'])
     list_class(Animal_dict, Mammals)

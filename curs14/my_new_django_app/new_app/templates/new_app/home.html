@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Curs14</title>
+</head>
+<body>
+    <h1>1. Create django view that will return to user current date and time</h1>
+    <p>{{ex1}}</p>
+    <h1>2. Create django view that will return as response a random number</h1>
+    <p>{{ex2}}</p>
+    <h1>3. Create django view that will display days until New year</h1>
+    <p>{{ex3}}</p>
+    <h1>4. Create django view that will display django project content</h1>
+    {% for file in ex4 %}
+        <p>{{file}}</p>
+    {% endfor %}
+    <h1>5. Create view that return current scheme and path of HTTP request</h1>
+    <p>Current scheme: {{ex5.scheme}}</p>
+    <p>Current path: {{ex5.path}}</p>
+</body>
+</html>

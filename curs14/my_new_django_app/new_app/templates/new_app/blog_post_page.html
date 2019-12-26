@@ -1,0 +1,7 @@
+<h3>{{ blog_post.title }}</h1>
+<p>{{ blog_post.content }}</p1>
+<p>{{ blog_post.author }}</p1>
+</br>
+<a href='{% url 'blog_posts' %}'>Back</a>
+</br>
+<a href='{% url 'edit-blog' blog_post.id %}'>Edit blog post</a>

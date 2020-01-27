@@ -35,4 +35,4 @@ while counter<20:
 
     
 with open('999_data.json', 'w') as f:
-    json.dump(data, f)
+    json.dump(data, f, ensure_ascii=False)

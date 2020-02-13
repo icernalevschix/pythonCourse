@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'job_list.apps.JobListConfig',
-    'users.apps.UsersConfig',
+    'job_list',
+    'users',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
+    'statistics_app',
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'job_list.schema.schema',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

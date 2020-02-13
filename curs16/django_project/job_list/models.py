@@ -11,7 +11,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    date_expire = models.DateTimeField(default=expire_date(30))
+    date_expire = models.DateField(default=expire_date(30))
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     sallary = models.CharField(default='Negociabil', max_length=20)
 

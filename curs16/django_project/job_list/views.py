@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
-
+from datetime import date
 
 # def home(request):
 #     context = {
@@ -19,6 +19,9 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-date_posted'] # minus sign ( oldest to newest )
     paginate_by = 5
+
+    def get_queryset(self):
+        return Post.objects.filter(date_expire__gte=date.today())
 
 
 class UserPostListView(ListView):

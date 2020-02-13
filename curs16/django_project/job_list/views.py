@@ -18,14 +18,14 @@ class PostListView(ListView):
     template_name = 'job_list/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted'] # minus sign ( oldest to newest )
-    paginate_by = 4
+    paginate_by = 5
 
 
 class UserPostListView(ListView):
     model = Post
     template_name = 'job_list/user_posts.html'
     context_object_name = 'posts'
-    paginate_by = 4
+    paginate_by = 5
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))

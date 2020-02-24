@@ -16,6 +16,7 @@ class JobsSpider(scrapy.Spider):
         item['sallary'] = sallary
         item['title'] = title
         item['content'] = ' '.join(response.xpath("//*[contains(@class, 'preview')]/div[4]/text()").getall()).strip().replace('\r\n', '')
+        
         yield item
 
     def parse(self, response):

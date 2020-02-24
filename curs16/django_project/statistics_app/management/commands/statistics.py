@@ -34,30 +34,16 @@ javascript_pattern2 = [{'LOWER': 'js'}]
 php_pattern = [{'LOWER': 'php'}]
 swift_pattern = [{'LOWER': 'swift'}]
 
+matcher.add('OBJECTIVE-C', None, obj_c_pattern1) 
+matcher.add('PYTHON', None, python_pattern)
+matcher.add('C/C++', None, c_pattern, c_pattern2, c_pattern3, c_pattern4)
+matcher.add('JAVA', None, java_pattern, java_pattern2)
+matcher.add('C#', None, c_sharp_pattern, c_sharp_pattern2, c_sharp_pattern3, c_sharp_pattern4)
+matcher.add('JAVASCRIPT', None, javascript_pattern, javascript_pattern2)
+matcher.add('PHP', None, php_pattern)
+matcher.add('SWIFT', None, swift_pattern)
 
 languages = {}
-
-def increment_l(matcher, doc, i, matches):
-    print(matcher, doc, i, matches)
-    match_ids = set()
-    for match_id, x, y in matches:
-        if match_id in match_ids:
-            pass
-        else:
-            lang = nlp.vocab.strings[match_id]
-            print(lang)
-            languages[lang] = languages.get(lang, 0) + 1
-            match_ids.add(match_id)
-
-matcher.add('OBJECTIVE-C]', increment_l, obj_c_pattern1) 
-matcher.add('PYTHON', increment_l, python_pattern)
-matcher.add('C/C++', increment_l, c_pattern, c_pattern2, c_pattern3, c_pattern4)
-matcher.add('JAVA', increment_l, java_pattern, java_pattern2)
-matcher.add('C#', increment_l, c_sharp_pattern, c_sharp_pattern2, c_sharp_pattern3, c_sharp_pattern4)
-matcher.add('JAVASCRIPT', increment_l, javascript_pattern, javascript_pattern2)
-matcher.add('PHP', increment_l, php_pattern)
-matcher.add('SWIFT', increment_l, swift_pattern)
-
 
 class Command(BaseCommand):
 
@@ -69,9 +55,19 @@ class Command(BaseCommand):
             print('\n', nlp_title)
             matches = matcher(nlp_title)
 
+            match_ids = set()
+
             for match_id, start, end in matches:
+                lang = nlp.vocab.strings[match_id]
                 print(nlp_title[start:end])
-            
+                print(matches)
+
+                if lang not in match_ids:
+                    languages[lang] = languages.get(lang, 0) + 1
+
+                match_ids.add(lang)
+            print(match_ids)
+
         print(languages)
         graph1 = totals_graph(sorted(languages.items(), key=lambda x: x[1], reverse = True))
         graph1.savefig('media/statistics/totals_chart.jpg')
